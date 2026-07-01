@@ -9,348 +9,169 @@
 <title>INSTA · Vinculación</title>
 <style>
   @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@600;700&display=swap');
-
   :root {
-    --navy:    #1a2744;
-    --navy2:   #243056;
-    --blue:    #2d5be3;
-    --blue-lt: #4a74f0;
-    --gold:    #f5a623;
-    --white:   #ffffff;
-    --grey0:   #f0f3fb;
-    --grey1:   #dde3f4;
-    --grey2:   #9aa3bf;
-    --grey3:   #5a6380;
-    --text:    #1a2040;
+    --navy:#1a2744; --navy2:#243056; --blue:#2d5be3; --blue-lt:#4a74f0;
+    --white:#ffffff; --grey0:#f0f3fb; --grey1:#dde3f4; --grey2:#9aa3bf; --grey3:#5a6380; --text:#1a2040;
+    --en-curso:#2563eb; --sin-real:#dc2626; --con-doc:#16a34a; --sin-doc:#d97706;
+    --radius:14px; --radius-sm:8px; --shadow:0 4px 24px rgba(26,39,68,.13);
+  }
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:'Inter',sans-serif;background:var(--grey0);color:var(--text);min-height:100dvh;-webkit-tap-highlight-color:transparent}
 
-    /* estado colors */
-    --en-curso:   #2563eb;
-    --sin-real:   #dc2626;
-    --con-doc:    #16a34a;
-    --sin-doc:    #d97706;
+  /* HEADER */
+  header{background:var(--navy);padding:16px 20px 0;position:sticky;top:0;z-index:100;box-shadow:0 2px 12px rgba(0,0,0,.25)}
+  .header-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px}
+  header h1{font-family:'Space Grotesk',sans-serif;font-size:1.1rem;font-weight:700;color:var(--white)}
+  header p{font-size:.7rem;color:var(--grey2);margin-top:2px}
+  #sync-btn{background:var(--blue);color:var(--white);border:none;border-radius:20px;font-size:.72rem;font-weight:600;padding:6px 14px;cursor:pointer;display:flex;align-items:center;gap:6px;transition:background .2s;white-space:nowrap}
+  #sync-btn:active{background:var(--blue-lt)}
 
-    --radius: 14px;
-    --radius-sm: 8px;
-    --shadow: 0 4px 24px rgba(26,39,68,.13);
-  }
+  /* TABS CARRERAS */
+  .tabs-carrera{display:flex;overflow-x:auto;gap:6px;padding-bottom:0;scrollbar-width:none}
+  .tabs-carrera::-webkit-scrollbar{display:none}
+  .tab-c{flex-shrink:0;background:rgba(255,255,255,.1);color:var(--grey2);border:none;border-radius:16px 16px 0 0;padding:7px 14px;font-family:'Inter',sans-serif;font-size:.72rem;font-weight:600;cursor:pointer;transition:all .2s;white-space:nowrap}
+  .tab-c.active{background:var(--grey0);color:var(--navy)}
 
-  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  /* MAIN */
+  main{padding:14px}
 
-  body {
-    font-family: 'Inter', sans-serif;
-    background: var(--grey0);
-    color: var(--text);
-    min-height: 100dvh;
-    -webkit-tap-highlight-color: transparent;
-  }
+  /* FILTROS JORNADA */
+  .jornada-row{display:flex;gap:6px;overflow-x:auto;margin-bottom:12px;scrollbar-width:none;padding-bottom:2px}
+  .jornada-row::-webkit-scrollbar{display:none}
+  .jpill{flex-shrink:0;padding:5px 12px;border-radius:20px;font-size:.7rem;font-weight:600;border:1.5px solid var(--grey1);background:var(--white);color:var(--grey3);cursor:pointer;transition:all .15s;white-space:nowrap}
+  .jpill.active{background:var(--navy2);color:var(--white);border-color:var(--navy2)}
 
-  /* ── HEADER ── */
-  header {
-    background: var(--navy);
-    padding: 18px 20px 14px;
-    position: sticky; top: 0; z-index: 100;
-    box-shadow: 0 2px 12px rgba(0,0,0,.25);
-  }
-  header h1 {
-    font-family: 'Space Grotesk', sans-serif;
-    font-size: 1.15rem; font-weight: 700;
-    color: var(--white); letter-spacing: .3px;
-  }
-  header p { font-size: .72rem; color: var(--grey2); margin-top: 2px; }
-  .header-row { display: flex; align-items: center; justify-content: space-between; }
-  #sync-btn {
-    background: var(--blue); color: var(--white);
-    border: none; border-radius: 20px;
-    font-size: .72rem; font-weight: 600;
-    padding: 6px 14px; cursor: pointer;
-    display: flex; align-items: center; gap: 6px;
-    transition: background .2s;
-  }
-  #sync-btn:active { background: var(--blue-lt); }
-  #sync-btn svg { width: 14px; height: 14px; }
+  /* BÚSQUEDA + FILTRO ESTADO */
+  .controls{display:flex;flex-direction:column;gap:8px;margin-bottom:12px}
+  .search-wrap{position:relative}
+  .search-wrap svg{position:absolute;left:11px;top:50%;transform:translateY(-50%);width:15px;height:15px;color:var(--grey2)}
+  #search{width:100%;padding:10px 10px 10px 34px;border:1.5px solid var(--grey1);border-radius:var(--radius-sm);font-family:'Inter',sans-serif;font-size:.85rem;background:var(--white);color:var(--text);outline:none;transition:border-color .2s}
+  #search:focus{border-color:var(--blue)}
+  .estado-row{display:flex;gap:6px;overflow-x:auto;scrollbar-width:none}
+  .estado-row::-webkit-scrollbar{display:none}
+  .epill{flex-shrink:0;padding:5px 12px;border-radius:20px;font-size:.7rem;font-weight:600;border:1.5px solid var(--grey1);background:var(--white);color:var(--grey3);cursor:pointer;transition:all .15s;white-space:nowrap}
+  .epill.active{background:var(--navy);color:var(--white);border-color:var(--navy)}
 
-  /* ── TABS ── */
-  .tabs {
-    display: flex; overflow-x: auto; gap: 6px;
-    padding: 12px 16px 0;
-    background: var(--navy);
-    scrollbar-width: none;
-  }
-  .tabs::-webkit-scrollbar { display: none; }
-  .tab {
-    flex-shrink: 0;
-    background: rgba(255,255,255,.1);
-    color: var(--grey2);
-    border: none; border-radius: 20px 20px 0 0;
-    padding: 8px 16px;
-    font-family: 'Inter', sans-serif;
-    font-size: .75rem; font-weight: 600;
-    cursor: pointer; transition: all .2s;
-    white-space: nowrap;
-  }
-  .tab.active {
-    background: var(--grey0);
-    color: var(--navy);
-  }
+  /* STATS */
+  .stats{display:grid;grid-template-columns:repeat(4,1fr);gap:7px;margin-bottom:12px}
+  .stat{background:var(--white);border-radius:var(--radius-sm);padding:9px 5px;text-align:center;box-shadow:var(--shadow)}
+  .stat-num{font-size:1.25rem;font-weight:700}
+  .stat-lbl{font-size:.58rem;color:var(--grey3);margin-top:2px;line-height:1.2}
+  .stat-num.ec{color:var(--en-curso)} .stat-num.sr{color:var(--sin-real)}
+  .stat-num.cd{color:var(--con-doc)}  .stat-num.sd{color:var(--sin-doc)}
 
-  /* ── CONTENT ── */
-  main { padding: 16px; }
+  /* CONTADOR */
+  .count-bar{font-size:.72rem;color:var(--grey3);margin-bottom:8px;padding-left:2px}
 
-  /* ── SEARCH + FILTER ── */
-  .controls {
-    display: flex; flex-direction: column; gap: 10px;
-    margin-bottom: 14px;
-  }
-  .search-wrap {
-    position: relative;
-  }
-  .search-wrap svg {
-    position: absolute; left: 12px; top: 50%; transform: translateY(-50%);
-    width: 16px; height: 16px; color: var(--grey2);
-  }
-  #search {
-    width: 100%; padding: 11px 12px 11px 36px;
-    border: 1.5px solid var(--grey1);
-    border-radius: var(--radius-sm);
-    font-family: 'Inter', sans-serif; font-size: .88rem;
-    background: var(--white); color: var(--text);
-    outline: none; transition: border-color .2s;
-  }
-  #search:focus { border-color: var(--blue); }
+  /* CARDS */
+  .card-list{display:flex;flex-direction:column;gap:9px}
+  .card{background:var(--white);border-radius:var(--radius);padding:13px 15px;box-shadow:var(--shadow);border-left:4px solid var(--grey1);cursor:pointer;transition:transform .1s;position:relative}
+  .card:active{transform:scale(.98)}
+  .card.ec{border-left-color:var(--en-curso)} .card.sr{border-left-color:var(--sin-real)}
+  .card.cd{border-left-color:var(--con-doc)}  .card.sd{border-left-color:var(--sin-doc)}
+  .card-name{font-weight:600;font-size:.88rem;margin-bottom:5px;color:var(--text);padding-right:90px}
+  .card-meta{font-size:.68rem;color:var(--grey3);display:flex;flex-wrap:wrap;gap:4px}
+  .mchip{background:var(--grey0);padding:2px 7px;border-radius:8px;font-size:.65rem}
+  .badge{position:absolute;right:12px;top:13px;padding:3px 9px;border-radius:20px;font-size:.62rem;font-weight:700;text-transform:uppercase;letter-spacing:.4px;max-width:100px;text-align:center;line-height:1.3}
+  .bec{background:#dbeafe;color:var(--en-curso)} .bsr{background:#fee2e2;color:var(--sin-real)}
+  .bcd{background:#dcfce7;color:var(--con-doc)}  .bsd{background:#fef3c7;color:var(--sin-doc)}
 
-  .filter-row { display: flex; gap: 8px; overflow-x: auto; scrollbar-width: none; }
-  .filter-row::-webkit-scrollbar { display: none; }
-  .pill {
-    flex-shrink: 0;
-    padding: 6px 14px;
-    border-radius: 20px;
-    font-size: .72rem; font-weight: 600;
-    border: 1.5px solid var(--grey1);
-    background: var(--white); color: var(--grey3);
-    cursor: pointer; transition: all .15s;
-    white-space: nowrap;
-  }
-  .pill.active { background: var(--navy); color: var(--white); border-color: var(--navy); }
+  /* EMPTY */
+  .empty{text-align:center;padding:50px 20px;color:var(--grey2)}
+  .empty-icon{font-size:2.5rem;margin-bottom:10px}
 
-  /* ── STATS BAR ── */
-  .stats {
-    display: grid; grid-template-columns: repeat(4,1fr);
-    gap: 8px; margin-bottom: 14px;
-  }
-  .stat {
-    background: var(--white);
-    border-radius: var(--radius-sm);
-    padding: 10px 6px;
-    text-align: center;
-    box-shadow: var(--shadow);
-  }
-  .stat-num { font-size: 1.3rem; font-weight: 700; }
-  .stat-lbl { font-size: .6rem; color: var(--grey3); margin-top: 2px; line-height: 1.2; }
-  .stat-num.en-curso  { color: var(--en-curso); }
-  .stat-num.sin-real  { color: var(--sin-real); }
-  .stat-num.con-doc   { color: var(--con-doc); }
-  .stat-num.sin-doc   { color: var(--sin-doc); }
+  /* MODAL */
+  .overlay{position:fixed;inset:0;background:rgba(10,16,36,.55);backdrop-filter:blur(3px);z-index:200;display:none;align-items:flex-end;justify-content:center}
+  .overlay.open{display:flex}
+  .modal{background:var(--white);border-radius:24px 24px 0 0;padding:22px 20px 34px;width:100%;max-width:480px;animation:slideUp .25s ease}
+  @keyframes slideUp{from{transform:translateY(60px);opacity:0}to{transform:translateY(0);opacity:1}}
+  .modal-handle{width:38px;height:4px;background:var(--grey1);border-radius:2px;margin:0 auto 18px}
+  .modal-name{font-family:'Space Grotesk',sans-serif;font-size:1.05rem;font-weight:700;color:var(--navy);margin-bottom:4px}
+  .modal-sub{font-size:.75rem;color:var(--grey3);margin-bottom:18px;line-height:1.5}
+  .modal-label{font-size:.7rem;font-weight:600;color:var(--grey3);text-transform:uppercase;letter-spacing:.5px;margin-bottom:9px}
+  .status-grid{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin-bottom:20px}
+  .sopt{padding:13px 8px;border-radius:var(--radius-sm);border:2px solid var(--grey1);text-align:center;cursor:pointer;font-size:.75rem;font-weight:600;transition:all .15s;line-height:1.3}
+  .sopt .oi{font-size:1.3rem;display:block;margin-bottom:3px}
+  .sopt.sel-ec{background:#dbeafe;border-color:var(--en-curso);color:var(--en-curso)}
+  .sopt.sel-sr{background:#fee2e2;border-color:var(--sin-real);color:var(--sin-real)}
+  .sopt.sel-cd{background:#dcfce7;border-color:var(--con-doc);color:var(--con-doc)}
+  .sopt.sel-sd{background:#fef3c7;border-color:var(--sin-doc);color:var(--sin-doc)}
+  .save-btn{width:100%;padding:14px;background:var(--blue);color:var(--white);border:none;border-radius:var(--radius-sm);font-family:'Space Grotesk',sans-serif;font-size:.95rem;font-weight:700;cursor:pointer;transition:background .2s}
+  .save-btn:active{background:var(--blue-lt)}
+  .save-btn:disabled{background:var(--grey2);cursor:not-allowed}
 
-  /* ── CARDS ── */
-  .card-list { display: flex; flex-direction: column; gap: 10px; }
-  .card {
-    background: var(--white);
-    border-radius: var(--radius);
-    padding: 14px 16px;
-    box-shadow: var(--shadow);
-    border-left: 4px solid var(--grey1);
-    cursor: pointer; transition: transform .1s, box-shadow .1s;
-    position: relative;
-  }
-  .card:active { transform: scale(.98); }
-  .card.en-curso  { border-left-color: var(--en-curso); }
-  .card.sin-real  { border-left-color: var(--sin-real); }
-  .card.con-doc   { border-left-color: var(--con-doc); }
-  .card.sin-doc   { border-left-color: var(--sin-doc); }
-  .card-name {
-    font-weight: 600; font-size: .92rem;
-    margin-bottom: 4px; color: var(--text);
-  }
-  .card-meta {
-    font-size: .73rem; color: var(--grey3);
-    display: flex; flex-wrap: wrap; gap: 6px;
-  }
-  .meta-chip {
-    background: var(--grey0);
-    padding: 2px 8px; border-radius: 10px;
-    font-size: .68rem;
-  }
-  .status-badge {
-    position: absolute; right: 14px; top: 14px;
-    padding: 3px 10px; border-radius: 20px;
-    font-size: .65rem; font-weight: 700;
-    text-transform: uppercase; letter-spacing: .5px;
-  }
-  .badge-en-curso { background: #dbeafe; color: var(--en-curso); }
-  .badge-sin-real { background: #fee2e2; color: var(--sin-real); }
-  .badge-con-doc  { background: #dcfce7; color: var(--con-doc); }
-  .badge-sin-doc  { background: #fef3c7; color: var(--sin-doc); }
+  /* TOAST */
+  #toast{position:fixed;bottom:22px;left:50%;transform:translateX(-50%);background:var(--navy);color:var(--white);padding:11px 20px;border-radius:30px;font-size:.8rem;font-weight:600;box-shadow:var(--shadow);opacity:0;transition:opacity .3s;z-index:999;white-space:nowrap;pointer-events:none}
+  #toast.show{opacity:1}
 
-  /* ── EMPTY ── */
-  .empty {
-    text-align: center; padding: 60px 20px;
-    color: var(--grey2);
-  }
-  .empty-icon { font-size: 3rem; margin-bottom: 12px; }
-  .empty p { font-size: .88rem; }
-
-  /* ── MODAL ── */
-  .overlay {
-    position: fixed; inset: 0;
-    background: rgba(10,16,36,.55);
-    backdrop-filter: blur(3px);
-    z-index: 200;
-    display: none; align-items: flex-end; justify-content: center;
-  }
-  .overlay.open { display: flex; }
-  .modal {
-    background: var(--white);
-    border-radius: 24px 24px 0 0;
-    padding: 24px 20px 36px;
-    width: 100%; max-width: 480px;
-    animation: slideUp .25s ease;
-  }
-  @keyframes slideUp {
-    from { transform: translateY(60px); opacity: 0; }
-    to   { transform: translateY(0);    opacity: 1; }
-  }
-  .modal-handle {
-    width: 40px; height: 4px;
-    background: var(--grey1);
-    border-radius: 2px;
-    margin: 0 auto 20px;
-  }
-  .modal-name {
-    font-family: 'Space Grotesk', sans-serif;
-    font-size: 1.1rem; font-weight: 700;
-    color: var(--navy); margin-bottom: 4px;
-  }
-  .modal-sub { font-size: .78rem; color: var(--grey3); margin-bottom: 20px; }
-  .modal-label {
-    font-size: .72rem; font-weight: 600;
-    color: var(--grey3); text-transform: uppercase;
-    letter-spacing: .5px; margin-bottom: 10px;
-  }
-  .status-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 24px; }
-  .status-opt {
-    padding: 14px 10px;
-    border-radius: var(--radius-sm);
-    border: 2px solid var(--grey1);
-    text-align: center;
-    cursor: pointer;
-    font-size: .78rem; font-weight: 600;
-    transition: all .15s;
-    line-height: 1.3;
-  }
-  .status-opt:hover { transform: scale(1.02); }
-  .status-opt.sel-en-curso { background:#dbeafe; border-color:var(--en-curso); color:var(--en-curso); }
-  .status-opt.sel-sin-real { background:#fee2e2; border-color:var(--sin-real); color:var(--sin-real); }
-  .status-opt.sel-con-doc  { background:#dcfce7; border-color:var(--con-doc);  color:var(--con-doc); }
-  .status-opt.sel-sin-doc  { background:#fef3c7; border-color:var(--sin-doc);  color:var(--sin-doc); }
-  .status-opt .opt-icon { font-size: 1.4rem; display: block; margin-bottom: 4px; }
-
-  .save-btn {
-    width: 100%; padding: 15px;
-    background: var(--blue); color: var(--white);
-    border: none; border-radius: var(--radius-sm);
-    font-family: 'Space Grotesk', sans-serif;
-    font-size: 1rem; font-weight: 700;
-    cursor: pointer; transition: background .2s;
-  }
-  .save-btn:active { background: var(--blue-lt); }
-  .save-btn:disabled { background: var(--grey2); cursor: not-allowed; }
-
-  /* ── TOAST ── */
-  #toast {
-    position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%);
-    background: var(--navy); color: var(--white);
-    padding: 12px 22px; border-radius: 30px;
-    font-size: .82rem; font-weight: 600;
-    box-shadow: var(--shadow);
-    opacity: 0; transition: opacity .3s;
-    z-index: 999; white-space: nowrap;
-    pointer-events: none;
-  }
-  #toast.show { opacity: 1; }
-
-  /* ── LOADING ── */
-  .spinner {
-    width: 40px; height: 40px;
-    border: 3px solid var(--grey1);
-    border-top-color: var(--blue);
-    border-radius: 50%;
-    animation: spin .8s linear infinite;
-    margin: 60px auto;
-  }
-  @keyframes spin { to { transform: rotate(360deg); } }
-
-  .loading-wrap { text-align: center; padding: 40px 20px; }
-  .loading-wrap p { color: var(--grey3); font-size: .82rem; margin-top: 14px; }
+  /* LOADING */
+  .spinner{width:36px;height:36px;border:3px solid var(--grey1);border-top-color:var(--blue);border-radius:50%;animation:spin .8s linear infinite;margin:50px auto}
+  @keyframes spin{to{transform:rotate(360deg)}}
+  .loading-wrap{text-align:center;padding:30px 20px}
+  .loading-wrap p{color:var(--grey3);font-size:.8rem;margin-top:12px}
 </style>
 </head>
 <body>
 
 <header>
-  <div class="header-row">
+  <div class="header-top">
     <div>
       <h1>INSTA · Vinculación</h1>
-      <p id="last-sync">Cargando datos...</p>
+      <p id="last-sync">Cargando...</p>
     </div>
     <button id="sync-btn" onclick="loadData()">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-        <path d="M23 4v6h-6M1 20v-6h6"/>
-        <path d="M3.51 9a9 9 0 0114.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0020.49 15"/>
-      </svg>
-      Sincronizar
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="width:13px;height:13px">
+        <path d="M23 4v6h-6M1 20v-6h6"/><path d="M3.51 9a9 9 0 0114.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0020.49 15"/>
+      </svg>Sincronizar
     </button>
+  </div>
+  <!-- TABS CARRERA -->
+  <div class="tabs-carrera" id="tabs-carrera">
+    <button class="tab-c active" onclick="setCarrera('Todos')">Todos</button>
+    <button class="tab-c" onclick="setCarrera('Electricidad')">Electricidad</button>
+    <button class="tab-c" onclick="setCarrera('Electrónica')">Electrónica</button>
+    <button class="tab-c" onclick="setCarrera('Redes y Telecomunicaciones')">Redes y Telec.</button>
+    <button class="tab-c" onclick="setCarrera('Mecánica Automotriz')">Mec. Automotriz</button>
   </div>
 </header>
 
-<!-- TABS por carrera -->
-<div class="tabs">
-  <button class="tab active" onclick="setTab('Todos')">Todos</button>
-  <button class="tab" onclick="setTab('Electricidad')">Electricidad</button>
-  <button class="tab" onclick="setTab('Electrónica')">Electrónica</button>
-  <button class="tab" onclick="setTab('Redes y Telecomunicaciones')">Redes y Telec.</button>
-  <button class="tab" onclick="setTab('Mecánica Automotriz')">Mec. Automotriz</button>
-</div>
-
 <main>
-  <!-- Búsqueda y filtros -->
+  <!-- Filtro jornada/modalidad -->
+  <div class="jornada-row" id="jornada-row" style="margin-top:10px">
+    <button class="jpill active" data-j="">Todas</button>
+    <button class="jpill" data-j="Matutina">Matutina</button>
+    <button class="jpill" data-j="Nocturna">Nocturna</button>
+    <button class="jpill" data-j="Híbrida">Híbrida</button>
+    <button class="jpill" data-j="Validación de Conocimientos">Validación</button>
+    <button class="jpill" data-j="Actualización de Conocimientos">Actualización</button>
+  </div>
+
+  <!-- Búsqueda + estado -->
   <div class="controls">
     <div class="search-wrap">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-        <circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/>
-      </svg>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
       <input type="search" id="search" placeholder="Buscar estudiante..." oninput="renderList()">
     </div>
-    <div class="filter-row" id="filter-row">
-      <button class="pill active" onclick="setFilter('')">Todos</button>
-      <button class="pill" onclick="setFilter('En curso')">En curso</button>
-      <button class="pill" onclick="setFilter('Sin realizar')">Sin realizar</button>
-      <button class="pill" onclick="setFilter('Culminado con documentación')">Con doc.</button>
-      <button class="pill" onclick="setFilter('Culminado sin documentación')">Sin doc.</button>
+    <div class="estado-row">
+      <button class="epill active" data-e="">Todos</button>
+      <button class="epill" data-e="En curso">En curso</button>
+      <button class="epill" data-e="Sin realizar">Sin realizar</button>
+      <button class="epill" data-e="Culminado con documentación">Con doc.</button>
+      <button class="epill" data-e="Culminado sin documentación">Sin doc.</button>
     </div>
   </div>
 
   <!-- Stats -->
   <div class="stats" id="stats"></div>
+  <div class="count-bar" id="count-bar"></div>
 
   <!-- Lista -->
   <div class="card-list" id="card-list">
-    <div class="loading-wrap">
-      <div class="spinner"></div>
-      <p>Cargando estudiantes...</p>
-    </div>
+    <div class="loading-wrap"><div class="spinner"></div><p>Cargando estudiantes...</p></div>
   </div>
 </main>
 
-<!-- Modal edición -->
+<!-- Modal -->
 <div class="overlay" id="overlay" onclick="closeModal(event)">
   <div class="modal" id="modal">
     <div class="modal-handle"></div>
@@ -358,298 +179,260 @@
     <div class="modal-sub" id="modal-sub"></div>
     <div class="modal-label">Estado de Vinculación</div>
     <div class="status-grid">
-      <div class="status-opt" onclick="selectStatus('En curso')">
-        <span class="opt-icon">🔵</span>En curso
-      </div>
-      <div class="status-opt" onclick="selectStatus('Sin realizar')">
-        <span class="opt-icon">🔴</span>Sin realizar
-      </div>
-      <div class="status-opt" onclick="selectStatus('Culminado con documentación')">
-        <span class="opt-icon">🟢</span>Culminado con documentación
-      </div>
-      <div class="status-opt" onclick="selectStatus('Culminado sin documentación')">
-        <span class="opt-icon">🟡</span>Culminado sin documentación
-      </div>
+      <div class="sopt" onclick="selectStatus('En curso')"><span class="oi">🔵</span>En curso</div>
+      <div class="sopt" onclick="selectStatus('Sin realizar')"><span class="oi">🔴</span>Sin realizar</div>
+      <div class="sopt" onclick="selectStatus('Culminado con documentación')"><span class="oi">🟢</span>Culminado con documentación</div>
+      <div class="sopt" onclick="selectStatus('Culminado sin documentación')"><span class="oi">🟡</span>Culminado sin documentación</div>
     </div>
-    <button class="save-btn" id="save-btn" onclick="saveStatus()" disabled>
-      Guardar cambio
-    </button>
+    <button class="save-btn" id="save-btn" onclick="saveStatus()" disabled>Guardar cambio</button>
   </div>
 </div>
 
-<!-- Toast -->
 <div id="toast"></div>
 
 <script>
-// ═══════════════════════════════════════════════
-//  CONFIGURACIÓN — reemplaza con tu URL de Apps Script
-// ═══════════════════════════════════════════════
-const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbz7VjECnZONVO5ChywLdtMEKlCWqJkfMIWv0m7I0PopBbt1LkTbK370XBcGDpo3Tmo4/exec';
+// ════════════════════════════════════════════
+// CONFIGURACIÓN — reemplaza con tu URL de Apps Script
+// ════════════════════════════════════════════
+const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwscqK04xCicyxSP93iKOzU9pSzaoMQfn497uKFu7DQVIMWcpxcz01CCboXXuuiBWa3/exec';
 
-// ═══════════════════════════════════════════════
+// ════════════════════════════════════════════
 let allStudents = [];
-let currentTab    = 'Todos';
-let currentFilter = '';
-let editingRow    = null;
+let currentCarrera = 'Todos';
+let currentJornada = '';
+let currentEstado  = '';
+let editingRow     = null;
 let selectedStatus = null;
 
-// Mapa de estado → clave CSS
-const statusClass = {
-  'En curso':                       'en-curso',
-  'Sin realizar':                   'sin-real',
-  'Culminado con documentación':    'con-doc',
-  'Culminado sin documentación':    'sin-doc',
+const SC = { // status → CSS class
+  'En curso':'ec','Sin realizar':'sr',
+  'Culminado con documentación':'cd','Culminado sin documentación':'sd'
 };
-const badgeClass = {
-  'En curso':                       'badge-en-curso',
-  'Sin realizar':                   'badge-sin-real',
-  'Culminado con documentación':    'badge-con-doc',
-  'Culminado sin documentación':    'badge-sin-doc',
+const BC = { // badge classes
+  'En curso':'bec','Sin realizar':'bsr',
+  'Culminado con documentación':'bcd','Culminado sin documentación':'bsd'
+};
+const SOPT = { // option sel classes
+  'En curso':'sel-ec','Sin realizar':'sel-sr',
+  'Culminado con documentación':'sel-cd','Culminado sin documentación':'sel-sd'
 };
 
-// ─── CARGAR DATOS ───────────────────────────────
+// ─── CARGAR ─────────────────────────────────
 async function loadData() {
   const btn = document.getElementById('sync-btn');
-  btn.textContent = '...';
+  btn.innerHTML = '⏳ Cargando';
   btn.disabled = true;
-
   try {
-    const res = await fetch(`${APPS_SCRIPT_URL}?action=getAll`, { cache: 'no-store' });
+    const res = await fetch(`${APPS_SCRIPT_URL}?action=getAll`,{cache:'no-store'});
     const json = await res.json();
-
-    if (json.error) throw new Error(json.error);
-
+    if(json.error) throw new Error(json.error);
     allStudents = json.students;
     const now = new Date();
     document.getElementById('last-sync').textContent =
-      `Actualizado ${now.toLocaleTimeString('es-EC', {hour:'2-digit', minute:'2-digit'})}`;
-
-    renderStats();
-    renderList();
+      `Actualizado ${now.toLocaleTimeString('es-EC',{hour:'2-digit',minute:'2-digit'})} · ${allStudents.length} estudiantes`;
+    renderStats(); renderList();
     toast('✅ Datos sincronizados');
-  } catch (e) {
+  } catch(e) {
     console.error(e);
-    toast('⚠️ Error al cargar. Verifica la conexión.');
-
-    // Datos demo para vista previa
-    if (allStudents.length === 0) loadDemo();
+    toast('⚠️ Error de conexión — modo demo');
+    if(allStudents.length===0) loadDemo();
   } finally {
-    btn.innerHTML = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-      <path d="M23 4v6h-6M1 20v-6h6"/>
-      <path d="M3.51 9a9 9 0 0114.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0020.49 15"/>
-    </svg> Sincronizar`;
+    btn.innerHTML = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="width:13px;height:13px"><path d="M23 4v6h-6M1 20v-6h6"/><path d="M3.51 9a9 9 0 0114.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0020.49 15"/></svg>Sincronizar`;
     btn.disabled = false;
   }
 }
 
 function loadDemo() {
+  // Muestra de datos reales del Excel para demo
   allStudents = [
-    { row:2, nombre:'Delgado Pereira Bryan Alipio',   carrera:'Electricidad',               nivel:'Cuarto',  jornada:'Matutina',  vinculacion:'Sin realizar' },
-    { row:3, nombre:'Quishpe Pilataxi Johan Michael', carrera:'Electricidad',               nivel:'Cuarto',  jornada:'Matutina',  vinculacion:'Sin realizar' },
-    { row:10,nombre:'Ayo Mendoza Carlos Daniel',      carrera:'Redes y Telecomunicaciones', nivel:'Cuarto',  jornada:'Matutina',  vinculacion:'Sin realizar' },
-    { row:11,nombre:'Jimenez Cisneros Juan Esteban',  carrera:'Redes y Telecomunicaciones', nivel:'Cuarto',  jornada:'Matutina',  vinculacion:'En curso' },
-    { row:18,nombre:'Abalco Torres Danny Erick',      carrera:'Electrónica',                nivel:'Cuarto',  jornada:'Matutina',  vinculacion:'En curso' },
-    { row:23,nombre:'Ayala Diaz Mateo Alejandro',     carrera:'Mecánica Automotriz',        nivel:'Cuarto',  jornada:'Matutina',  vinculacion:'Sin realizar' },
-    { row:31,nombre:'Guaman Caguano Jose Samuel',     carrera:'Electricidad',               nivel:'Cuarto',  jornada:'Nocturna',  vinculacion:'Sin realizar' },
-    { row:33,nombre:'Jumbo Quito Gustavo Andres',     carrera:'Electricidad',               nivel:'Tercero', jornada:'Nocturna',  vinculacion:'Culminado sin documentación' },
+    {row:2,nombre:'Delgado Pereira Bryan Alipio',carrera:'Electricidad',nivel:'Cuarto',modalidad:'Presencial',jornada:'Matutina',periodo:'octubre 25-marzo 26',vinculacion:'Sin realizar'},
+    {row:3,nombre:'Quishpe Pilataxi Johan Michael',carrera:'Electricidad',nivel:'Cuarto',modalidad:'Presencial',jornada:'Matutina',periodo:'octubre 25-marzo 26',vinculacion:'Sin realizar'},
+    {row:10,nombre:'Jimenez Cisneros Juan Esteban',carrera:'Redes y Telecomunicaciones',nivel:'Cuarto',modalidad:'Presencial',jornada:'Matutina',periodo:'octubre 25-marzo 26',vinculacion:'En curso'},
+    {row:17,nombre:'Abalco Torres Danny Erick',carrera:'Electrónica',nivel:'Cuarto',modalidad:'Presencial',jornada:'Matutina',periodo:'octubre 25-marzo 26',vinculacion:'En curso'},
+    {row:22,nombre:'Ayala Diaz Mateo Alejandro',carrera:'Mecánica Automotriz',nivel:'Cuarto',modalidad:'Presencial',jornada:'Matutina',periodo:'octubre 25-marzo 26',vinculacion:'Sin realizar'},
+    {row:30,nombre:'Guaman Caguano Jose Samuel',carrera:'Electricidad',nivel:'Cuarto',modalidad:'Presencial',jornada:'Nocturna',periodo:'octubre 25-marzo 26',vinculacion:'Sin realizar'},
+    {row:32,nombre:'Jumbo Quito Gustavo Andres',carrera:'Electricidad',nivel:'Tercero',modalidad:'Presencial',jornada:'Nocturna',periodo:'octubre 25-marzo 26',vinculacion:'Culminado sin documentación'},
+    {row:55,nombre:'Lopez Patiño Alexis Francisco',carrera:'Electricidad',nivel:'Cuarto',modalidad:'Híbrida',jornada:'Híbrida',periodo:'octubre 25-marzo 26',vinculacion:'Culminado con documentación'},
+    {row:70,nombre:'Aguirre Rivera Carlos Fabricio',carrera:'Electricidad',nivel:'No aplica',modalidad:'Validación de Conocimientos',jornada:'Validación de Conocimientos',periodo:'septiembre 25-febrero 26',vinculacion:'Sin realizar'},
+    {row:71,nombre:'Alvarado Arguello Edison Javier',carrera:'Electricidad',nivel:'No aplica',modalidad:'Validación de Conocimientos',jornada:'Validación de Conocimientos',periodo:'septiembre 25-febrero 26',vinculacion:'En curso'},
   ];
-  document.getElementById('last-sync').textContent = 'Modo demo — configura Apps Script';
-  renderStats();
-  renderList();
+  document.getElementById('last-sync').textContent = `Modo demo · ${allStudents.length} estudiantes`;
+  renderStats(); renderList();
 }
 
-// ─── TABS ───────────────────────────────────────
-function setTab(tab) {
-  currentTab = tab;
-  document.querySelectorAll('.tab').forEach(t => {
-    t.classList.toggle('active', t.textContent.trim() === tab ||
-      (tab !== 'Todos' && t.textContent.includes(tab.substring(0,6))));
+// ─── TABS / FILTROS ──────────────────────────
+function setCarrera(c) {
+  currentCarrera = c;
+  document.querySelectorAll('.tab-c').forEach(t=>t.classList.remove('active'));
+  // Buscar tab por texto
+  document.querySelectorAll('.tab-c').forEach(t=>{
+    const txt = t.textContent.trim();
+    if((c==='Todos'&&txt==='Todos')||(c!=='Todos'&&c.includes(txt.substring(0,5)))||(txt===c))
+      t.classList.add('active');
   });
-  // fix active for Todos
-  document.querySelectorAll('.tab').forEach(t => {
-    if (tab === 'Todos') t.classList.toggle('active', t.textContent.trim() === 'Todos');
+  // fix exacto
+  document.querySelectorAll('.tab-c').forEach(t=>t.classList.remove('active'));
+  const labels={'Todos':'Todos','Electricidad':'Electricidad','Electrónica':'Electrónica',
+    'Redes y Telecomunicaciones':'Redes y Telec.','Mecánica Automotriz':'Mec. Automotriz'};
+  document.querySelectorAll('.tab-c').forEach(t=>{
+    if(t.textContent.trim()===(labels[c]||c)) t.classList.add('active');
   });
-  renderStats();
-  renderList();
+  renderStats(); renderList();
 }
 
-// ─── FILTRO ─────────────────────────────────────
-function setFilter(f) {
-  currentFilter = f;
-  document.querySelectorAll('.pill').forEach(p => {
-    const label = p.textContent.trim();
-    const match = f === '' ? label === 'Todos'
-      : label.toLowerCase().includes(f.toLowerCase().substring(0,5));
-    p.classList.toggle('active', f === '' ? label === 'Todos' : p.dataset.val === f);
+// Jornada pills
+document.querySelectorAll('.jpill').forEach(p=>{
+  p.addEventListener('click',()=>{
+    currentJornada = p.dataset.j;
+    document.querySelectorAll('.jpill').forEach(x=>x.classList.remove('active'));
+    p.classList.add('active');
+    renderStats(); renderList();
   });
-  // simpler approach
-  document.querySelectorAll('.pill').forEach((p,i) => {
-    const vals = ['', 'En curso', 'Sin realizar', 'Culminado con documentación', 'Culminado sin documentación'];
-    p.dataset.val = vals[i] || '';
-    p.classList.toggle('active', p.dataset.val === f);
-  });
-  renderList();
-}
+});
 
-// ─── FILTRAR ESTUDIANTES ─────────────────────────
-function filtered() {
+// Estado pills
+document.querySelectorAll('.epill').forEach(p=>{
+  p.addEventListener('click',()=>{
+    currentEstado = p.dataset.e;
+    document.querySelectorAll('.epill').forEach(x=>x.classList.remove('active'));
+    p.classList.add('active');
+    renderList();
+  });
+});
+
+// ─── FILTRAR ─────────────────────────────────
+function getFiltered() {
   const q = document.getElementById('search').value.toLowerCase();
-  return allStudents.filter(s => {
-    const matchTab    = currentTab === 'Todos' || s.carrera === currentTab;
-    const matchFilter = currentFilter === '' || s.vinculacion === currentFilter;
-    const matchSearch = !q || s.nombre.toLowerCase().includes(q);
-    return matchTab && matchFilter && matchSearch;
+  return allStudents.filter(s=>{
+    const matchC = currentCarrera==='Todos' || s.carrera===currentCarrera;
+    const matchJ = !currentJornada || s.jornada===currentJornada || s.modalidad===currentJornada;
+    const matchE = !currentEstado  || (s.vinculacion||'').toLowerCase()===(currentEstado||'').toLowerCase();
+    const matchQ = !q || s.nombre.toLowerCase().includes(q);
+    return matchC && matchJ && matchE && matchQ;
   });
 }
 
-// ─── STATS ──────────────────────────────────────
-function renderStats() {
-  const base = currentTab === 'Todos' ? allStudents : allStudents.filter(s => s.carrera === currentTab);
-  const count = (v) => base.filter(s => s.vinculacion === v).length;
-  document.getElementById('stats').innerHTML = `
-    <div class="stat"><div class="stat-num en-curso">${count('En curso')}</div><div class="stat-lbl">En curso</div></div>
-    <div class="stat"><div class="stat-num sin-real">${count('Sin realizar')}</div><div class="stat-lbl">Sin realizar</div></div>
-    <div class="stat"><div class="stat-num con-doc">${count('Culminado con documentación')}</div><div class="stat-lbl">Con doc.</div></div>
-    <div class="stat"><div class="stat-num sin-doc">${count('Culminado sin documentación')}</div><div class="stat-lbl">Sin doc.</div></div>
-  `;
+function getBase() {
+  return allStudents.filter(s=>{
+    const matchC = currentCarrera==='Todos' || s.carrera===currentCarrera;
+    const matchJ = !currentJornada || s.jornada===currentJornada || s.modalidad===currentJornada;
+    return matchC && matchJ;
+  });
 }
 
-// ─── RENDER LISTA ───────────────────────────────
-function renderList() {
-  const list = filtered();
-  const el = document.getElementById('card-list');
+// ─── STATS ───────────────────────────────────
+function renderStats() {
+  const base = getBase();
+  const cnt = v => base.filter(s=>(s.vinculacion||'').toLowerCase()===v.toLowerCase()).length;
+  document.getElementById('stats').innerHTML = `
+    <div class="stat"><div class="stat-num ec">${cnt('En curso')}</div><div class="stat-lbl">En curso</div></div>
+    <div class="stat"><div class="stat-num sr">${cnt('Sin realizar')}</div><div class="stat-lbl">Sin realizar</div></div>
+    <div class="stat"><div class="stat-num cd">${cnt('Culminado con documentación')}</div><div class="stat-lbl">Con doc.</div></div>
+    <div class="stat"><div class="stat-num sd">${cnt('Culminado sin documentación')}</div><div class="stat-lbl">Sin doc.</div></div>`;
+}
 
-  if (list.length === 0) {
-    el.innerHTML = `<div class="empty"><div class="empty-icon">🔍</div><p>No se encontraron estudiantes</p></div>`;
+// ─── RENDER LISTA ─────────────────────────────
+function renderList() {
+  const list = getFiltered();
+  const el = document.getElementById('card-list');
+  document.getElementById('count-bar').textContent = `Mostrando ${list.length} de ${allStudents.length} estudiantes`;
+  if(!list.length){
+    el.innerHTML=`<div class="empty"><div class="empty-icon">🔍</div><p>Sin resultados</p></div>`;
     return;
   }
-
-  el.innerHTML = list.map(s => {
-    const sc  = statusClass[s.vinculacion] || '';
-    const bc  = badgeClass[s.vinculacion]  || '';
-    const lbl = s.vinculacion || 'Sin estado';
-    return `
-    <div class="card ${sc}" onclick="openModal(${s.row})">
-      <div class="status-badge ${bc}">${lbl}</div>
+  el.innerHTML = list.map(s=>{
+    const vin = s.vinculacion || 'Sin realizar';
+    const sc  = SC[vin]||'sr';
+    const bc  = BC[vin]||'bsr';
+    // Jornada/Modalidad a mostrar
+    const jorLabel = s.modalidad==='Presencial' ? s.jornada : s.modalidad;
+    return `<div class="card ${sc}" onclick="openModal(${s.row})">
+      <div class="badge ${bc}">${vin}</div>
       <div class="card-name">${s.nombre}</div>
       <div class="card-meta">
-        <span class="meta-chip">📚 ${s.carrera}</span>
-        <span class="meta-chip">🎓 ${s.nivel}</span>
-        <span class="meta-chip">🌙 ${s.jornada}</span>
+        <span class="mchip">📚 ${s.carrera}</span>
+        <span class="mchip">🎓 ${s.nivel||'—'}</span>
+        <span class="mchip">🕐 ${jorLabel}</span>
       </div>
     </div>`;
   }).join('');
 }
 
-// ─── MODAL ──────────────────────────────────────
+// ─── MODAL ───────────────────────────────────
 function openModal(row) {
-  const s = allStudents.find(x => x.row === row);
-  if (!s) return;
-  editingRow = row;
-  selectedStatus = s.vinculacion;
-
+  const s = allStudents.find(x=>x.row===row);
+  if(!s) return;
+  editingRow = row; selectedStatus = s.vinculacion || 'Sin realizar';
+  const jorLabel = s.modalidad==='Presencial' ? s.jornada : s.modalidad;
   document.getElementById('modal-name').textContent = s.nombre;
-  document.getElementById('modal-sub').textContent  = `${s.carrera} · ${s.nivel} · ${s.jornada}`;
-
-  highlightOpts(s.vinculacion);
+  document.getElementById('modal-sub').textContent  = `${s.carrera} · ${s.nivel||'—'} · ${jorLabel}`;
+  highlightOpts(selectedStatus);
   document.getElementById('save-btn').disabled = true;
   document.getElementById('overlay').classList.add('open');
 }
 
 function closeModal(e) {
-  if (e.target === document.getElementById('overlay')) {
+  if(e.target===document.getElementById('overlay')){
     document.getElementById('overlay').classList.remove('open');
-    editingRow = null; selectedStatus = null;
+    editingRow=null; selectedStatus=null;
   }
 }
 
 function selectStatus(val) {
   selectedStatus = val;
   highlightOpts(val);
-  const s = allStudents.find(x => x.row === editingRow);
-  document.getElementById('save-btn').disabled = (s && s.vinculacion === val);
+  const s = allStudents.find(x=>x.row===editingRow);
+  const cur = s ? (s.vinculacion||'Sin realizar') : '';
+  document.getElementById('save-btn').disabled = (cur===val);
 }
 
 function highlightOpts(val) {
-  const opts = document.querySelectorAll('.status-opt');
-  const map = {
-    'En curso':                       'sel-en-curso',
-    'Sin realizar':                   'sel-sin-real',
-    'Culminado con documentación':    'sel-con-doc',
-    'Culminado sin documentación':    'sel-sin-doc',
-  };
-  opts.forEach(o => {
-    const txt = o.textContent.trim().replace(/^[^\w]+/,'');
-    // clear all sel classes
-    Object.values(map).forEach(c => o.classList.remove(c));
-    if (txt === val || o.textContent.includes(val.substring(0,6))) {
-      o.classList.add(map[val] || '');
-    }
+  document.querySelectorAll('.sopt').forEach(o=>{
+    Object.values(SOPT).forEach(c=>o.classList.remove(c));
   });
-  // precise match
-  opts.forEach(o => {
-    Object.values(map).forEach(c => o.classList.remove(c));
-  });
-  opts.forEach(o => {
-    const labels = ['En curso','Sin realizar','Culminado con documentación','Culminado sin documentación'];
-    labels.forEach(lbl => {
-      if (o.textContent.includes(lbl) && lbl === val) {
-        o.classList.add(map[lbl]);
-      }
-    });
+  document.querySelectorAll('.sopt').forEach(o=>{
+    const labels=['En curso','Sin realizar','Culminado con documentación','Culminado sin documentación'];
+    labels.forEach(lbl=>{ if(o.textContent.includes(lbl)&&lbl===val) o.classList.add(SOPT[lbl]); });
   });
 }
 
-// ─── GUARDAR ────────────────────────────────────
+// ─── GUARDAR ─────────────────────────────────
 async function saveStatus() {
-  if (!editingRow || !selectedStatus) return;
+  if(!editingRow||!selectedStatus) return;
   const btn = document.getElementById('save-btn');
-  btn.textContent = 'Guardando...';
-  btn.disabled = true;
-
+  btn.textContent='Guardando...'; btn.disabled=true;
   try {
-    const res = await fetch(APPS_SCRIPT_URL, {
-      method: 'POST',
-      body: JSON.stringify({ action: 'updateVinculacion', row: editingRow, value: selectedStatus }),
+    const res = await fetch(APPS_SCRIPT_URL,{
+      method:'POST',
+      body: JSON.stringify({action:'updateVinculacion',row:editingRow,value:selectedStatus})
     });
     const json = await res.json();
-    if (json.error) throw new Error(json.error);
-
-    // Actualizar localmente
-    const s = allStudents.find(x => x.row === editingRow);
-    if (s) s.vinculacion = selectedStatus;
-
+    if(json.error) throw new Error(json.error);
+    const s = allStudents.find(x=>x.row===editingRow);
+    if(s) s.vinculacion = selectedStatus;
     document.getElementById('overlay').classList.remove('open');
-    renderStats();
-    renderList();
+    renderStats(); renderList();
     toast('✅ Estado actualizado');
-  } catch (e) {
+  } catch(e) {
     console.error(e);
     toast('⚠️ Error al guardar. Intenta de nuevo.');
   } finally {
-    btn.textContent = 'Guardar cambio';
-    btn.disabled = false;
+    btn.textContent='Guardar cambio'; btn.disabled=false;
   }
 }
 
-// ─── TOAST ──────────────────────────────────────
+// ─── TOAST ───────────────────────────────────
 function toast(msg) {
-  const t = document.getElementById('toast');
-  t.textContent = msg;
-  t.classList.add('show');
-  setTimeout(() => t.classList.remove('show'), 2800);
+  const t=document.getElementById('toast');
+  t.textContent=msg; t.classList.add('show');
+  setTimeout(()=>t.classList.remove('show'),2800);
 }
 
-// ─── INIT ───────────────────────────────────────
-window.addEventListener('DOMContentLoaded', () => {
-  // Inicializar pills con data-val
-  const pills = document.querySelectorAll('.pill');
-  const vals = ['', 'En curso', 'Sin realizar', 'Culminado con documentación', 'Culminado sin documentación'];
-  pills.forEach((p,i) => { p.dataset.val = vals[i] || ''; });
-
-  if (APPS_SCRIPT_URL === 'TU_URL_DE_APPS_SCRIPT_AQUI') {
+// ─── INIT ────────────────────────────────────
+window.addEventListener('DOMContentLoaded',()=>{
+  if(APPS_SCRIPT_URL==='TU_URL_DE_APPS_SCRIPT_AQUI'){
     toast('⚠️ Modo demo — configura Apps Script');
-    loadDemo();
+    setTimeout(loadDemo, 300);
   } else {
     loadData();
   }
